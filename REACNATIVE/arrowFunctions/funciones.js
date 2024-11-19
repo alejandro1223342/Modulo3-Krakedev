@@ -19,9 +19,24 @@ ejecutarSumar = () => {
 
 }
 
+ejecutarResta = () =>{
+    let valor1 = recuperarFloat("txtValor1");
+    let valor2 = recuperarFloat("txtValor2");
+    let resultadoResta;
+    resultadoResta=restar(valor1,valor2);
+    console.log(resultadoResta);
+
+}
 sumar = (sum1,sum2) => {
     let suma;
     suma = sum1 + sum2;
     return suma;
+
+}
+
+restar = (num1,num2) => {
+    let resta;
+    resta= num1-num2;
+    return resta;
 
 }
