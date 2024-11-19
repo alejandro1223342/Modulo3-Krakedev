@@ -1,12 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View, Alert } from 'react-native';
 
 export default function App() {
+
+  const despedirse = () =>{
+    Alert.alert("Mensaje","Chao Pipol")
+  }
   return (
     <View style={styles.container}>
       <Text>¡Hola Mundo desde Expo!</Text>
       <StatusBar style="auto" />
-    
+      <Button
+          //Campo Obligatorio
+          title="OK"
+
+          //Propiedad onPress con javaScript
+          //No recibe parametros
+          onPress={()=> {
+            Alert.alert("Mensaje","Hola Pipol")
+          }}
+          
+      />
+
+      <Button
+        title='ADIOS'
+
+        onPress={despedirse}
+      />
     </View>
   );
 }
