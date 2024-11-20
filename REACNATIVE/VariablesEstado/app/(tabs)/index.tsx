@@ -12,6 +12,8 @@ export default function App() {
 
 //destructuracion de arreglos
 const [contadorEstado,setContadorEstado]=useState(0);
+//En el parentesis va el estado inicial
+const [contadorVidas,setContadorVidas]=useState(5);
 
 //let contador = 0;
  
@@ -25,14 +27,34 @@ const incrementar = () =>{
 
  const decrementar = () =>{
   setContadorEstado(contadorEstado-1);
+ 
+ }
+
+ const quitarVida = () =>{
+//La condición va antes en el código porque queremos validar el 
+//estado actual del contador antes de realizar cualquier acción (como decrementar el valor)
+  if(contadorVidas==0){
+    Alert.alert("ADVERTENCIA","GAME OVER")
+    return;// Detiene la ejecución para que no continúe restando.
+  } 
+  setContadorVidas(contadorVidas-1);
 
  }
 
+ const premiar = () => {
+setContadorVidas(contadorVidas+3)
+
+ }
+
+ 
 
   return (
     <View style={styles.container}>
       <Text>Ejemplo Varialbes de Estado</Text>
       <Text>Contador Estado: {contadorEstado}</Text>
+      <Text>VIDAS</Text>
+      <Text>Contador Vidas: {contadorVidas} </Text>
+
       <StatusBar style="auto" />
  <Button
     title='INCREMENTAR'
@@ -45,8 +67,21 @@ const incrementar = () =>{
     onPress={decrementar}
  />
 
+ <Button
+ title='PERDER VIDA'
+ onPress={quitarVida}
+ />
+
+ <Button
+ title='PREMIAR'
+ onPress={premiar}
+ />
+ 
+
     </View>
   );
+
+
 }
 
 const styles = StyleSheet.create({
