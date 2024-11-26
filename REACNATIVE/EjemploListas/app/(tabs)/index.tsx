@@ -59,6 +59,20 @@ let ItemPersona: React.FC<ItemPersonaProps> = (props) => {
         <Text style={styles.textoPrincipal}> {props.persona.nombre} {props.persona.apellido}</Text>
         <Text style={styles.textoSecundario}>{props.persona.cedula}</Text>
       </View>
+
+      <View style={styles.itemBotones}>
+
+        <Button
+          title=' E '
+          color='green'
+        />
+
+        <Button
+          title=' X '
+          color='red'
+        />
+
+      </View>
     </View>);
 }
 
@@ -199,7 +213,7 @@ const styles = StyleSheet.create({
   areCabezera: {
     flex: 4,
     //backgroundColor: 'chartreuse',
-    justifyContent:'center'
+    justifyContent: 'center'
 
   },
   areaContenido: {
@@ -238,5 +252,13 @@ const styles = StyleSheet.create({
   areaBotones: {
     flexDirection: 'row',
     justifyContent: 'space-evenly'
+  },
+
+  itemBotones: {
+    flexDirection: 'column',
+    backgroundColor: 'darckorange',
+    flex: 2,
+    alignItems:'center',
+    justifyContent:'space-between'
   }
 });
