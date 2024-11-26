@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Alert, Button, FlatList } from 'react-native';
+import { TextInput, StyleSheet, Text, View, Alert, Button, FlatList } from 'react-native';
 //Repintar pantalla
 import { } from 'react-native-gesture-handler';
+import { useState } from 'react';
 
 let personas = [
   { nombre: "Alejandro", apellido: "Muñoz", cedula: "1234567891" },
@@ -56,17 +57,70 @@ let ItemPersona: React.FC<ItemPersonaProps> = (props) => {
 
       <View style={styles.itemContenido}>
         <Text style={styles.textoPrincipal}> {props.persona.nombre} {props.persona.apellido}</Text>
-        <Text style={styles.textoSecundario}>{props.persona.cedula}</Text>;
+        <Text style={styles.textoSecundario}>{props.persona.cedula}</Text>
       </View>
     </View>);
 }
 
+
 export default function App() {
+
+
+  const [txtCedula, setTxtCedula] = useState("");
+  const [txtNombre, setTxtNombre] = useState("");
+  const [txtApellido, setTxtApellido] = useState("");
+
+  let limpiar = () => {
+    setTxtNombre("");
+
+    setTxtCedula("");
+    setTxtApellido("");
+
+
+  }
+
+  let guardarPesona = () => {
+    let persona = { nombre: txtNombre, apellido: txtApellido, cedula: txtCedula };
+    personas.push(persona);
+    //console.log("PERSONAS>>", personas);
+    limpiar();
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.areCabezera}>
         <Text>PERSONAS</Text>
+        <TextInput style={styles.txt}
+          value={txtCedula}
+          placeholder='Ingrese su cedula'
+          onChangeText={setTxtCedula}
+          keyboardType='numeric'
+        />
+        <TextInput style={styles.txt}
+          value={txtNombre}
+          placeholder='Ingrese su Nombre'
+          onChangeText={setTxtNombre}
+        />
+        <TextInput style={styles.txt}
+          value={txtApellido}
+          placeholder='Ingrese su Apellido'
+          onChangeText={setTxtApellido}
+        />
+        <View style={styles.areaBotones}>
+          <Button
+            title='Guarda'
+            onPress={() => {
+              guardarPesona()
+
+            }}
+          />
+          <Button
+            title='Limpia'
+          />
+
+
+        </View>
+
       </View>
       <View style={styles.areaContenido}>
         <FlatList style={styles.lista}
@@ -103,7 +157,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightblue',
+    //backgroundColor: 'lightblue',
     flexDirection: 'column',//eje principal vertical
     justifyContent: 'flex-start',
     alignItems: 'stretch',
@@ -113,7 +167,7 @@ const styles = StyleSheet.create({
   },
 
   lista: {
-    backgroundColor: 'lightpink',
+    //backgroundColor: 'lightpink',
 
   },
 
@@ -144,16 +198,18 @@ const styles = StyleSheet.create({
 
   areCabezera: {
     flex: 4,
-    backgroundColor: 'chartreuse'
+    //backgroundColor: 'chartreuse',
+    justifyContent:'center'
+
   },
   areaContenido: {
-    flex: 10,
-    backgroundColor: 'coral'
+    flex: 6,
+    //backgroundColor: 'coral',
   },
 
   areaPie: {
     flex: 1,
-    backgroundColor: 'cornflowerblue',
+    //backgroundColor: 'cornflowerblue',
     justifyContent: 'center',
     alignItems: 'flex-end'
   },
@@ -170,5 +226,17 @@ const styles = StyleSheet.create({
     //backgroundColor: 'darkorange',
     flex: 20
 
+  },
+  txt: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    paddingTop: 3,
+    paddingHorizontal: 5,
+    marginBottom: 5
+  },
+
+  areaBotones: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly'
   }
 });
