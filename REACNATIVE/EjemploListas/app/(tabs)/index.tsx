@@ -118,11 +118,29 @@ export default function App() {
 
   }
 
+  let existePersona = () =>{
+    for(let i=0;i<personas.length;i++){
+      if(personas[i].cedula == txtCedula){
+        return true;
+      }
+    }
+
+    return false;
+
+  }
+
+
   let guardarPesona = () => {
     if (esNuevo) {
-      let persona = { nombre: txtNombre, apellido: txtApellido, cedula: txtCedula };
-      personas.push(persona);
 
+      if(existePersona()){
+
+        Alert.alert("Info","Ya existe una persona con la cédula "+txtCedula)
+      }else{
+        let persona = { nombre: txtNombre, apellido: txtApellido, cedula: txtCedula };
+        personas.push(persona);  
+      }
+      
     } else {
       //console.log("modificar persona")
 
@@ -190,6 +208,8 @@ export default function App() {
           //Le paso un elemmento que no se repita
           keyExtractor={(item) => {
             return item.cedula
+
+      
           }}
 
         />
