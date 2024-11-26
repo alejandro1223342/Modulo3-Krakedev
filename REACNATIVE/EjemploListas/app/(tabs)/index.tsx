@@ -13,6 +13,8 @@ let personas = [
 //indica si se esta creando una nueva persona o si se esta modificando
 let esNuevo=true
 
+//Almacena el indice del arreglo del elemento seleccionado para edicion
+let indiceSeleccionado=-1
 
 //Agrego la interfaz
 interface ItemPersonaProps {
@@ -84,6 +86,9 @@ export default function App() {
               setTxtNombre(props.persona.nombre)
               setTxtApellido(props.persona.apellido)
               esNuevo=false
+
+              indiceSeleccionado=props.indice
+              console.log(indiceSeleccionado)
             }}
           />
   
@@ -112,7 +117,10 @@ export default function App() {
       personas.push(persona);
      
     }else{
-      console.log("modificar persona")
+      //console.log("modificar persona")
+
+      personas[indiceSeleccionado].nombre=txtNombre;
+      personas[indiceSeleccionado].apellido=txtApellido;
     }
     //console.log("PERSONAS>>", personas);
     limpiar();
@@ -129,6 +137,7 @@ export default function App() {
           placeholder='Ingrese su cedula'
           onChangeText={setTxtCedula}
           keyboardType='numeric'
+          editable={esNuevo}
         />
         <TextInput style={styles.txt}
           value={txtNombre}
