@@ -26,7 +26,7 @@ export default function App() {
           return(
             <View style={styles.itemPersona}>
               <Text>{obj.item.nombre} ({obj.item.categoria})</Text>
-              <Text style={styles.itemCosto} >USD {obj.item.precioVenta}</Text>;
+              <Text style={styles.itemCosto}>USD {obj.item.precioVenta}</Text>;
             </View>) 
         }}
 
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     marginVertical:10,
     fontSize:20,
     fontWeight: '900', // Hace las letras gruesas
-
   },
   cajaTexto:{
     borderColor:"black",
@@ -71,9 +70,7 @@ const styles = StyleSheet.create({
   lista:{
     //backgroundColor:'lightpink',
     
-
   },
-
   itemPersona:{
     backgroundColor:'lemonchiffon',
     marginBottom:10,
@@ -85,9 +82,7 @@ const styles = StyleSheet.create({
   padding:10
     
   },
-
   itemCosto:{
     fontWeight: '900', // Hace las letras gruesas
-
   }
 });
