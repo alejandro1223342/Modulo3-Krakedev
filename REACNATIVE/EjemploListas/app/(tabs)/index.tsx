@@ -13,26 +13,35 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>PERSONAS</Text>
-      <FlatList style={styles.lista}
+      <View style={styles.areCabezera}>
+        <Text>PERSONAS</Text>
+      </View>
+      <View style={styles.areaContenido}>
+        <FlatList style={styles.lista}
 
-        data={personas}
-        //Le paso un objeto
-        renderItem={(obj) => {
+          data={personas}
+          //Le paso un objeto
+          renderItem={(obj) => {
 
-          return (
-            <View style={styles.itemPersona}>
-              <Text style={styles.textoPrincipal}>{obj.index} {obj.item.nombre} {obj.item.apellido}</Text>
-              <Text style={styles.textoSecundario}>{obj.item.cedula}</Text>;
-            </View>);
-        }}
+            return (
+              <View style={styles.itemPersona}>
+                <Text style={styles.textoPrincipal}>{obj.index} {obj.item.nombre} {obj.item.apellido}</Text>
+                <Text style={styles.textoSecundario}>{obj.item.cedula}</Text>;
+              </View>);
+          }}
 
-        //Le paso un elemmento que no se repita
-        keyExtractor={(item)=>{
-          return item.cedula
-        }}
+          //Le paso un elemmento que no se repita
+          keyExtractor={(item) => {
+            return item.cedula
+          }}
 
-      />
+        />
+      </View>
+
+      <View style={styles.areaPie}>
+
+        <Text>Autor: Alejandro Muñoz</Text>
+      </View>
       <StatusBar style="auto" />
 
     </View>
@@ -46,22 +55,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'lightblue',
     flexDirection: 'column',//eje principal vertical
-    justifyContent:'flex-start',
-    alignItems:'stretch',
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
     paddingTop: 50,
     paddingHorizontal: 10
 
   },
 
-  lista:{
-    backgroundColor:'lightpink',
+  lista: {
+    backgroundColor: 'lightpink',
 
   },
 
-  itemPersona:{
-    backgroundColor:'lemonchiffon',
-    marginBottom:10,
-    paddingLeft:10
+  itemPersona: {
+    backgroundColor: 'lemonchiffon',
+    marginBottom: 10,
+    paddingLeft: 10
   },
   cajaTexto: {
     borderColor: "black",
@@ -71,13 +80,29 @@ const styles = StyleSheet.create({
 
   },
 
-  textoPrincipal:{
-    fontSize:20
+  textoPrincipal: {
+    fontSize: 20
 
   },
 
-  textoSecundario:{
-    fontStyle:'italic',
-    fontSize:16
+  textoSecundario: {
+    fontStyle: 'italic',
+    fontSize: 16
+  },
+
+  areCabezera: {
+    flex: 4,
+    backgroundColor: 'chartreuse'
+  },
+  areaContenido: {
+    flex: 10,
+    backgroundColor: 'coral'
+  },
+
+  areaPie: {
+    flex: 1,
+    backgroundColor: 'cornflowerblue',
+    justifyContent:'center',
+    alignItems:'flex-end'
   }
 });
