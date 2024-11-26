@@ -9,6 +9,58 @@ let personas = [
   { nombre: "Javier", apellido: "Muñoz", cedula: "1234567893" }
 ];
 
+
+//Agrego la interfaz
+interface ItemPersonaProps {
+  indice: number;
+  persona: {
+    nombre: string;
+    apellido: string;
+    cedula: string;
+  };
+}
+
+
+//Como crear un componente
+
+//Me debe retornar jsx
+
+//Funciona pero como trabajo en typescript me da error en js no devuelve error
+
+/*let ItemPersona = (props) => {
+  return (
+    <View style={styles.itemPersona}>
+
+      <View style={styles.itemIndice}>
+
+        <Text>{props.indice}</Text>
+      </View>
+
+      <View style={styles.itemContenido}>
+        <Text style={styles.textoPrincipal}> {props.persona.nombre} {props.persona.apellido}</Text>
+        <Text style={styles.textoSecundario}>{props.persona.cedula}</Text>;
+      </View>
+    </View>);
+}*/
+
+
+//Para arreglar el error debo definir una interfaz con las propiedades del componente
+let ItemPersona: React.FC<ItemPersonaProps> = (props) => {
+  return (
+    <View style={styles.itemPersona}>
+
+      <View style={styles.itemIndice}>
+
+        <Text>{props.indice}</Text>
+      </View>
+
+      <View style={styles.itemContenido}>
+        <Text style={styles.textoPrincipal}> {props.persona.nombre} {props.persona.apellido}</Text>
+        <Text style={styles.textoSecundario}>{props.persona.cedula}</Text>;
+      </View>
+    </View>);
+}
+
 export default function App() {
 
   return (
@@ -24,18 +76,8 @@ export default function App() {
           renderItem={(obj) => {
 
             return (
-              <View style={styles.itemPersona}>
-
-                <View style={styles.itemIndice}>
-
-                  <Text>{obj.index}</Text>
-                </View>
-
-                <View style={styles.itemContenido}>
-                  <Text style={styles.textoPrincipal}> {obj.item.nombre} {obj.item.apellido}</Text>
-                  <Text style={styles.textoSecundario}>{obj.item.cedula}</Text>;
-                </View>
-              </View>);
+              <ItemPersona indice={obj.index} persona={obj.item} />
+            );
           }}
 
           //Le paso un elemmento que no se repita
