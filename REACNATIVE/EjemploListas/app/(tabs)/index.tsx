@@ -25,8 +25,16 @@ export default function App() {
 
             return (
               <View style={styles.itemPersona}>
-                <Text style={styles.textoPrincipal}>{obj.index} {obj.item.nombre} {obj.item.apellido}</Text>
-                <Text style={styles.textoSecundario}>{obj.item.cedula}</Text>;
+
+                <View style={styles.itemIndice}>
+
+                  <Text>{obj.index}</Text>
+                </View>
+
+                <View style={styles.itemContenido}>
+                  <Text style={styles.textoPrincipal}> {obj.item.nombre} {obj.item.apellido}</Text>
+                  <Text style={styles.textoSecundario}>{obj.item.cedula}</Text>;
+                </View>
               </View>);
           }}
 
@@ -70,7 +78,9 @@ const styles = StyleSheet.create({
   itemPersona: {
     backgroundColor: 'lemonchiffon',
     marginBottom: 10,
-    paddingLeft: 10
+    paddingLeft: 10,
+    flexDirection: 'row'
+
   },
   cajaTexto: {
     borderColor: "black",
@@ -102,7 +112,21 @@ const styles = StyleSheet.create({
   areaPie: {
     flex: 1,
     backgroundColor: 'cornflowerblue',
-    justifyContent:'center',
-    alignItems:'flex-end'
+    justifyContent: 'center',
+    alignItems: 'flex-end'
+  },
+
+  itemIndice: {
+    //backgroundColor: 'darkgray',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+
+  },
+
+  itemContenido: {
+    //backgroundColor: 'darkorange',
+    flex: 20
+
   }
 });
