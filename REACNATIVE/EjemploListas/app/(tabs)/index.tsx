@@ -11,10 +11,10 @@ let personas = [
 ];
 
 //indica si se esta creando una nueva persona o si se esta modificando
-let esNuevo=true
+let esNuevo = true
 
 //Almacena el indice del arreglo del elemento seleccionado para edicion
-let indiceSeleccionado=-1
+let indiceSeleccionado = -1
 
 //Agrego la interfaz
 interface ItemPersonaProps {
@@ -61,42 +61,49 @@ export default function App() {
   const [txtNombre, setTxtNombre] = useState("");
   const [txtApellido, setTxtApellido] = useState("");
 
+  const [numElementos, setNumElementos] = useState(personas.length);
   let ItemPersona: React.FC<ItemPersonaProps> = (props) => {
     return (
       <View style={styles.itemPersona}>
-  
+
         <View style={styles.itemIndice}>
-  
+
           <Text>{props.indice}</Text>
         </View>
-  
+
         <View style={styles.itemContenido}>
           <Text style={styles.textoPrincipal}> {props.persona.nombre} {props.persona.apellido}</Text>
           <Text style={styles.textoSecundario}>{props.persona.cedula}</Text>
         </View>
-  
+
         <View style={styles.itemBotones}>
-  
+
           <Button
             title=' E '
             color='green'
-  
-            onPress={()=>{
+
+            onPress={() => {
               setTxtCedula(props.persona.cedula)
               setTxtNombre(props.persona.nombre)
               setTxtApellido(props.persona.apellido)
-              esNuevo=false
+              esNuevo = false
 
-              indiceSeleccionado=props.indice
+              indiceSeleccionado = props.indice
               console.log(indiceSeleccionado)
             }}
           />
-  
+
           <Button
             title=' X '
             color='red'
+            onPress={() => {
+              indiceSeleccionado = props.indice;
+              personas.splice(indiceSeleccionado, 1);
+              setNumElementos(personas.length)
+
+            }}
           />
-  
+
         </View>
       </View>);
   }
@@ -107,25 +114,25 @@ export default function App() {
 
     setTxtCedula("");
     setTxtApellido("");
-    esNuevo=true;
+    esNuevo = true;
 
   }
 
   let guardarPesona = () => {
-    if(esNuevo){
+    if (esNuevo) {
       let persona = { nombre: txtNombre, apellido: txtApellido, cedula: txtCedula };
       personas.push(persona);
-     
-    }else{
+
+    } else {
       //console.log("modificar persona")
 
-      personas[indiceSeleccionado].nombre=txtNombre;
-      personas[indiceSeleccionado].apellido=txtApellido;
+      personas[indiceSeleccionado].nombre = txtNombre;
+      personas[indiceSeleccionado].apellido = txtApellido;
     }
     //console.log("PERSONAS>>", personas);
     limpiar();
+    setNumElementos(personas.length)
 
-    
   }
 
   return (
@@ -163,7 +170,7 @@ export default function App() {
               limpiar();
             }}
           />
-
+          <Text>Elementos: {numElementos}</Text>
 
         </View>
 
@@ -290,7 +297,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: 'darckorange',
     flex: 2,
-    alignItems:'center',
-    justifyContent:'space-between'
+    alignItems: 'center',
+    justifyContent: 'space-between'
   }
 });
