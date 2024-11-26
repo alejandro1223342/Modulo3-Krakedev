@@ -10,6 +10,9 @@ let personas = [
   { nombre: "Javier", apellido: "Muñoz", cedula: "1234567893" }
 ];
 
+//indica si se esta creando una nueva persona o si se esta modificando
+let esNuevo=true
+
 
 //Agrego la interfaz
 interface ItemPersonaProps {
@@ -46,35 +49,7 @@ interface ItemPersonaProps {
 
 
 //Para arreglar el error debo definir una interfaz con las propiedades del componente
-let ItemPersona: React.FC<ItemPersonaProps> = (props) => {
-  return (
-    <View style={styles.itemPersona}>
 
-      <View style={styles.itemIndice}>
-
-        <Text>{props.indice}</Text>
-      </View>
-
-      <View style={styles.itemContenido}>
-        <Text style={styles.textoPrincipal}> {props.persona.nombre} {props.persona.apellido}</Text>
-        <Text style={styles.textoSecundario}>{props.persona.cedula}</Text>
-      </View>
-
-      <View style={styles.itemBotones}>
-
-        <Button
-          title=' E '
-          color='green'
-        />
-
-        <Button
-          title=' X '
-          color='red'
-        />
-
-      </View>
-    </View>);
-}
 
 
 export default function App() {
@@ -84,20 +59,65 @@ export default function App() {
   const [txtNombre, setTxtNombre] = useState("");
   const [txtApellido, setTxtApellido] = useState("");
 
+  let ItemPersona: React.FC<ItemPersonaProps> = (props) => {
+    return (
+      <View style={styles.itemPersona}>
+  
+        <View style={styles.itemIndice}>
+  
+          <Text>{props.indice}</Text>
+        </View>
+  
+        <View style={styles.itemContenido}>
+          <Text style={styles.textoPrincipal}> {props.persona.nombre} {props.persona.apellido}</Text>
+          <Text style={styles.textoSecundario}>{props.persona.cedula}</Text>
+        </View>
+  
+        <View style={styles.itemBotones}>
+  
+          <Button
+            title=' E '
+            color='green'
+  
+            onPress={()=>{
+              setTxtCedula(props.persona.cedula)
+              setTxtNombre(props.persona.nombre)
+              setTxtApellido(props.persona.apellido)
+              esNuevo=false
+            }}
+          />
+  
+          <Button
+            title=' X '
+            color='red'
+          />
+  
+        </View>
+      </View>);
+  }
+
+
   let limpiar = () => {
     setTxtNombre("");
 
     setTxtCedula("");
     setTxtApellido("");
-
+    esNuevo=true;
 
   }
 
   let guardarPesona = () => {
-    let persona = { nombre: txtNombre, apellido: txtApellido, cedula: txtCedula };
-    personas.push(persona);
+    if(esNuevo){
+      let persona = { nombre: txtNombre, apellido: txtApellido, cedula: txtCedula };
+      personas.push(persona);
+     
+    }else{
+      console.log("modificar persona")
+    }
     //console.log("PERSONAS>>", personas);
     limpiar();
+
+    
   }
 
   return (
@@ -129,7 +149,10 @@ export default function App() {
             }}
           />
           <Button
-            title='Limpia'
+            title='Nuevo'
+            onPress={() => {
+              limpiar();
+            }}
           />
 
 
