@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
   },
 
   itemContenido: {
-    //backgroundColor: 'darkorange',
+    backgroundColor: 'darkorange',
     flex: 20
 
   },
