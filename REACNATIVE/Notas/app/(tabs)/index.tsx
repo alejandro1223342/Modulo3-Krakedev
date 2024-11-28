@@ -1,7 +1,3 @@
-COMANDOS
-npx create-expo-app MiPrimeraVez
-npx expo start
-
 import { StatusBar } from 'expo-status-bar';
 import {  StyleSheet, Text, View, Alert, Button } from 'react-native';
 //Repintar pantalla
@@ -34,18 +30,3 @@ const styles = StyleSheet.create({
     paddingHorizontal:10
   }
 });
-
-
-instalaciones
-
-
-
-PROYECTO: notas
-NAVEGACION: stack
-npm install @react-navigation/native
-npm install @react-navigation/native-stack
-
-Usar React Native elements
-npm install @rneui/themed @rneui/base
-npm install react-native-vector-icons
-
