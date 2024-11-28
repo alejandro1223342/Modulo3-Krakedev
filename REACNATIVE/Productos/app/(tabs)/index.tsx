@@ -101,24 +101,7 @@ export default function App() {
 
         </View>
         <View style={styles.itemBotones}>
-          <Button
-            title='Editar'
-            color='green'
-            onPress={() => {
-              setProductoId(producto.id.toString())
-              setProductoNombre(producto.nombre)
-              setProductoCategoria(producto.categoria)
-              setProductoPrecioCompra(producto.precioCompra.toString())
-              setProductoPrecioVenta(producto.precioVenta.toString())
-
-              setEsNuevo(false); // Cambiar el estado a 'false' para editar
-              //console.log(esNuevo)
-
-              setIndiceSeleccionado(indice); // Actualizar el índice seleccionado
-              console.log(indiceSeleccionado)
-            }}
-          />
-
+         
           <Button
             title="Eliminar"
             color="red"
