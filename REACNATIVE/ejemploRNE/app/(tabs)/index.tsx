@@ -4,15 +4,26 @@ import { StyleSheet, Text, View, Alert } from 'react-native';
 import { } from 'react-native-gesture-handler';
 
 //importante
-import { Button, Icon } from '@rneui/base';
+import { Button, Icon, Input } from '@rneui/base';
+import { useState } from 'react';
 
 
 
 export default function App() {
 
+  const [name, setName] = useState("");
   return (
     <View style={styles.container}>
       <Text>Ejemplo RNE</Text>
+      <Input
+        value={name}
+        onChangeText={setName}
+        placeholder='Ingrese su nombre'
+        label="Nombre"
+
+      />
+
+      <Text>{name}</Text>
       <Button
         title="OK"
         icon={{
@@ -22,6 +33,11 @@ export default function App() {
           type: 'font-awesome',
           size: 20,
           color: 'white',
+        }}
+
+        onPress={() => {
+          Alert.alert("Info","su nombre es "+name)
+
         }}
 
       />
