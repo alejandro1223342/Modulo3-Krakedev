@@ -63,19 +63,19 @@ export default function App() {
 
 
 
-  let ItemProducto: React.FC<ItemProductoProps> = (props) => {
+  let ItemProducto: React.FC<ItemProductoProps> = ({indice,producto}) => {
 
     return (
       <View style={styles.itemPersona}>
 
         <View style={styles.itemIndice}>
 
-          <Text>{props.producto.id}</Text>
+          <Text>{producto.id}</Text>
         </View>
 
         <View>
-          <Text>{props.producto.nombre} ({props.producto.categoria})</Text>
-          <Text style={styles.itemCosto}>USD {props.producto.precioVenta}</Text>
+          <Text>{producto.nombre} ({producto.categoria})</Text>
+          <Text style={styles.itemCosto}>USD {producto.precioVenta}</Text>
 
         </View>
         <View style={styles.itemBotones}>
@@ -83,16 +83,16 @@ export default function App() {
             title='Editar'
             color='green'
             onPress={() => {
-              setProductoId(props.producto.id.toString())
-              setProductoNombre(props.producto.nombre)
-              setProductoCategoria(props.producto.categoria)
-              setProductoPrecioCompra(props.producto.precioCompra.toString())
-              setProductoPrecioVenta(props.producto.precioVenta.toString())
+              setProductoId(producto.id.toString())
+              setProductoNombre(producto.nombre)
+              setProductoCategoria(producto.categoria)
+              setProductoPrecioCompra(producto.precioCompra.toString())
+              setProductoPrecioVenta(producto.precioVenta.toString())
 
               setEsNuevo(false); // Cambiar el estado a 'false' para editar
               //console.log(esNuevo)
 
-              setIndiceSeleccionado(props.indice); // Actualizar el índice seleccionado
+              setIndiceSeleccionado(indice); // Actualizar el índice seleccionado
               console.log(indiceSeleccionado)
             }}
           />
@@ -102,7 +102,7 @@ export default function App() {
             color='red'
 
             onPress={() => {
-              productos.splice(props.indice, 1);
+              productos.splice(indice, 1);
               setNumElementos(productos.length)
 
             }}
@@ -215,7 +215,7 @@ export default function App() {
               setProductoPrecioCompra(text); // Actualiza el precio de compra
               setProductoPrecioVenta((parseFloat(text) * 1.2).toString()); // Calcula el precio de venta como el doble
             }}
-             />
+          />
 
           <TextInput
             style={styles.txt}
@@ -253,18 +253,28 @@ export default function App() {
 
           data={productos}
           //Le paso un objeto
-          renderItem={(obj) => {
+          /*renderItem={(obj) => {
 
             return (
               <ItemProducto indice={obj.index} producto={obj.item} />
             );
-          }}
+          }}*/
 
+          //Desestruturacion en objetos
+
+          renderItem={({index,item}) => {
+
+            return (
+              <ItemProducto indice={index} producto={item} />
+            );
+          }}
           //Le paso un elemmento que no se repita
-          keyExtractor={(item) => {
+        /*keyExtractor={item => {
             return item.id.toString();
-          }}
-
+          }}*/
+          
+          //Simplificacion de parametros arrow Function
+          keyExtractor={item => item.id.toString()}
         />
       </View>
 
