@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, TextInput, StyleSheet, Text, View, Alert, Button, FlatList } from 'react-native';
+import { TouchableOpacity, Modal, ScrollView, TextInput, StyleSheet, Text, View, Alert, Button, FlatList } from 'react-native';
 //Repintar pantalla
 import { } from 'react-native-gesture-handler';
 import { useState } from 'react';
@@ -25,6 +25,17 @@ export default function App() {
   const [esNuevo, setEsNuevo] = useState(true);
   const [indiceSeleccionado, setIndiceSeleccionado] = useState(-1);
 
+  const [modalVisible, setModalVisible] = useState(false);
+  const [indiceEliminar, setIndiceEliminar] = useState("");
+
+  const eliminarProducto = () => {
+    if (indiceEliminar !== null) {
+      productos.splice(parseInt(indiceEliminar), 1); // Elimina el producto
+      setNumElementos(productos.length); // Actualiza el conteo de elementos
+      setIndiceEliminar("");
+      setModalVisible(false); // Cierra el modal
+    }
+  };
   const validar = () => {
     if (productoId === '') {
       Alert.alert("Info", "El código no puede estar vacío");
@@ -63,10 +74,21 @@ export default function App() {
 
 
 
-  let ItemProducto: React.FC<ItemProductoProps> = ({indice,producto}) => {
+  let ItemProducto: React.FC<ItemProductoProps> = ({ indice, producto }) => {
 
     return (
-      <View style={styles.itemPersona}>
+      <TouchableOpacity
+        onPress={() => {
+          setProductoId(producto.id.toString());
+          setProductoNombre(producto.nombre);
+          setProductoCategoria(producto.categoria);
+          setProductoPrecioCompra(producto.precioCompra.toString());
+          setProductoPrecioVenta(producto.precioVenta.toString());
+          setEsNuevo(false); // Cambiar el estado a 'false' para editar
+          setIndiceSeleccionado(indice); // Actualizar el índice seleccionado
+          console.log(indice);
+        }}
+        style={styles.itemPersona}>
 
         <View style={styles.itemIndice}>
 
@@ -98,18 +120,17 @@ export default function App() {
           />
 
           <Button
-            title='Eliminar'
-            color='red'
-
+            title="Eliminar"
+            color="red"
             onPress={() => {
-              productos.splice(indice, 1);
-              setNumElementos(productos.length)
-
+              setIndiceEliminar(indice.toString()); // Define el producto a eliminar
+              setModalVisible(true); // Abre el modal
             }}
           />
         </View>
 
-      </View>
+
+      </TouchableOpacity >
 
 
 
@@ -254,7 +275,7 @@ export default function App() {
           data={productos}
           //Le paso un objeto
           /*renderItem={(obj) => {
-
+  
             return (
               <ItemProducto indice={obj.index} producto={obj.item} />
             );
@@ -262,22 +283,39 @@ export default function App() {
 
           //Desestruturacion en objetos
 
-          renderItem={({index,item}) => {
+          renderItem={({ index, item }) => {
 
             return (
               <ItemProducto indice={index} producto={item} />
             );
           }}
           //Le paso un elemmento que no se repita
-        /*keyExtractor={item => {
-            return item.id.toString();
-          }}*/
-          
+          /*keyExtractor={item => {
+              return item.id.toString();
+            }}*/
+
           //Simplificacion de parametros arrow Function
           keyExtractor={item => item.id.toString()}
         />
-      </View>
 
+
+      </View>
+      <Modal
+        visible={modalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text>¿Estás seguro de eliminar este producto?</Text>
+            <View style={styles.modalButtons}>
+              <Button title="Cancelar" onPress={() => setModalVisible(false)} />
+              <Button title="Eliminar" color="red" onPress={eliminarProducto} />
+            </View>
+          </View>
+        </View>
+      </Modal>
       <View style={styles.areaPie}>
 
         <Text>Autor: Alejandro Muñoz</Text>
@@ -393,5 +431,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     marginRight: 10
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: 300,
+    alignItems: 'center',
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20,
   },
 });
