@@ -1,13 +1,16 @@
 import { View, StyleSheet, Text } from "react-native"
 import { Button, Input } from '@rneui/base'
 import { useState } from "react"
+import {saveGrade} from "../services/GradeServices"
 
 export const GradeForm = () => {
 
     const [subjet, setSubject] = useState("");
     const [grade, setGrade] = useState("");
+    
+    
     //Funcion
-    const save = () => { console.log(" guarda ") }
+    const save = () => { saveGrade({subjet:subjet,grade:grade}) }
     return (
         <View style={styles.container}>
             <Input
