@@ -17,9 +17,8 @@ export default function App() {
   return (
    // <NavigationContainer>
       <StackGrades.Navigator>
-
-        <StackGrades.Screen name='GradeFormNav' component={GradeForm} />
         <StackGrades.Screen name='ListGradesNav' component={ListGrades} />
+        <StackGrades.Screen name='GradeFormNav' component={GradeForm} />
 
       </StackGrades.Navigator>
 
