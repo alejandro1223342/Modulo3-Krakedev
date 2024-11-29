@@ -1,16 +1,46 @@
 import { View, StyleSheet, Text } from "react-native"
 import { Button, Input } from '@rneui/base'
 import { useState } from "react"
-import {saveGrade} from "../services/GradeServices"
+import { saveGrade } from "../services/GradeServices"
 
 export const GradeForm = () => {
 
     const [subjet, setSubject] = useState("");
     const [grade, setGrade] = useState("");
-    
-    
+
+    //Errores
+    const [errorSubjetc, setErrorSubject] = useState("");
+    const [errorGrade, setErrorGrade] = useState("");
+    let hasErrors=false;
     //Funcion
-    const save = () => { saveGrade({subjet:subjet,grade:grade}) }
+    const save = () => { 
+        setErrorGrade("");
+        setErrorSubject("");
+        validate();
+        if(!hasErrors){
+
+            saveGrade({ subjet: subjet, grade: grade }) }
+
+        }
+
+    //Validaciones
+    const validate = () => {
+        if(subjet==("")){
+            setErrorSubject("Debe ingresar una materia")
+            hasErrors=true;
+        }
+
+        let gradeFloat = parseFloat(grade);
+
+        
+        if(gradeFloat==null || isNaN(gradeFloat) || gradeFloat<0 || gradeFloat>10){
+            setErrorGrade("Debe ingresar una nota entre 0 y 10")
+            hasErrors=true;
+
+        }
+    }
+
+   
     return (
         <View style={styles.container}>
             <Input
@@ -18,6 +48,8 @@ export const GradeForm = () => {
                 onChangeText={setSubject}
                 placeholder="Ejemplo: Matematicas"
                 label="Materia"
+                errorMessage={errorSubjetc}
+
             />
 
             <Input
@@ -25,6 +57,7 @@ export const GradeForm = () => {
                 onChangeText={setGrade}
                 placeholder="0-10"
                 label="Nota"
+                errorMessage={errorGrade}
             />
 
             <Button
