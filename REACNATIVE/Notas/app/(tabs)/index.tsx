@@ -1,32 +1,31 @@
+
 import { StatusBar } from 'expo-status-bar';
-import {  StyleSheet, Text, View, Alert, Button } from 'react-native';
+import { StyleSheet, Text, View, Alert, Button } from 'react-native';
 //Repintar pantalla
-import {  } from 'react-native-gesture-handler';
+import { } from 'react-native-gesture-handler';
+
+//Importante para la navegacion
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { GradeForm } from '../Screens/GradeForm'
+import { ListGrades } from '../Screens/ListGrades'
 export default function App() {
 
+  const StackGrades = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text>Ejemplo Convertidor</Text>
+   // <NavigationContainer>
+      <StackGrades.Navigator>
 
-      <StatusBar style="auto" />
+        <StackGrades.Screen name='GradeFormNav' component={GradeForm} />
+        <StackGrades.Screen name='ListGradesNav' component={ListGrades} />
 
-    </View>
+      </StackGrades.Navigator>
+
+    //</NavigationContainer>
   );
 
 
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  cajaTexto:{
-    borderColor:"black",
-    borderWidth:1,
-    paddingTop:5,
-    paddingHorizontal:10
-  }
-});
