@@ -18,6 +18,7 @@ export const getGrades = () => {
   return grades;
 };
 
+//Esto sirve
 export const updateGrade = (nota) => {
   for (let i = 0; i < grades.length; i++) {
     if (grades[i].subject === nota.subject) {

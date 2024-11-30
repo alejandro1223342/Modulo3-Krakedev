@@ -17,6 +17,7 @@ export const GradeForm = ({ navigation, route }) => {
     subjectR = route.params.nota.subject;
     gradeR = route.params.nota.grade;
   }
+  //Esto sirve
   const [subject, setSubject] = useState(subjectR || "");
   const [grade, setGrade] = useState(gradeR == null ? null : gradeR + "");
   const [errorSubject, setErrorSubject] = useState("");

@@ -1,6 +1,7 @@
 COMANDOS
 npx create-expo-app MiPrimeraVez
 npx expo start
+npx create-expo-app Cualquiera --template blank
 
 import { StatusBar } from 'expo-status-bar';
 import {  StyleSheet, Text, View, Alert, Button } from 'react-native';
@@ -48,4 +49,11 @@ npm install @react-navigation/native-stack
 Usar React Native elements
 npm install @rneui/themed @rneui/base
 npm install react-native-vector-icons
+
+//Navegación anidada
+@react-navigation/drawer
+react-native-reanimated
+react-native-safe-area-context
+react-native-gesture-handler
+
 
