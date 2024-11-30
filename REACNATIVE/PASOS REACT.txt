@@ -55,5 +55,19 @@ npm install react-native-vector-icons
 react-native-reanimated
 react-native-safe-area-context
 react-native-gesture-handler
+npm install babel-plugin-module-resolver --save-dev
+
+babel. config.js
+
+import "react-native-gesture-handler";
+
+expo update
+
+expo start -- clear
 
 
+npm install react-navigation/bottom-tabs
+
+npm install react-native-vector-icons
+
+npm i --save-dev @types/react-native-vector-icons
