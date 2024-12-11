@@ -1,38 +1,44 @@
 import { View, StyleSheet } from 'react-native'
 import { Button, Text } from '@rneui/base'
-import {getAllPostService} from '../services/TestServices'
-import {createPostService} from '../services/TestServices'
-import {updatePostService} from '../services/TestServices'
-import {getByUserIdService} from '../services/TestServices'
-import {getAllProductsService} from '../services/TestServices'
-import {postProductsService} from '../services/TestServices'
-import {updateProductsService} from '../services/TestServices'
-
+import { getAllPostService } from '../services/TestServices'
+import { createPostService } from '../services/TestServices'
+import { updatePostService } from '../services/TestServices'
+import { getByUserIdService } from '../services/TestServices'
+import { getAllProductsService } from '../services/TestServices'
+import { postProductsService } from '../services/TestServices'
+import { updateProductsService } from '../services/TestServices'
+import { getDocumentsTypes } from '../services/TestServices'
 
 export const TestWebServices = () => {
-const getAllPosts = () => {
-getAllPostService();
+  const getAllPosts = () => {
+    getAllPostService();
 
-}
+  }
 
-const updatePost = () => {
-  updatePostService();
-}
+  const updatePost = () => {
+    updatePostService();
+  }
 
-const getByUserI = () =>{
+  const getByUserI = () => {
 
     getByUserIdService();
-}
+  }
 
-//Apis publicas
+  //Apis publicas
 
-const getAllProducts = () =>{
-  getAllProductsService();
-}
+  const getAllProducts = () => {
+    getAllProductsService();
+  }
 
-const updateProduct = () => {
-  updateProductsService();
-}
+  const updateProduct = () => {
+    updateProductsService();
+  }
+
+  //Test Apis
+
+  const documentTypes = () => {
+    getDocumentsTypes();
+  }
 
   return <View style={styles.container}>
     <Text style={styles.textContainer}>MODULO 3</Text>
@@ -45,16 +51,16 @@ const updateProduct = () => {
         title="Crear Post"
         onPress={createPostService}
       />
-        <Button
+      <Button
         title="Actualizar Post"
         onPress={updatePost}
       />
-        <Button
+      <Button
         title="Filtrar"
         onPress={getByUserI}
 
       />
-          <Button
+      <Button
         title="EL PEPE"
         onPress={getAllProducts}
       />
@@ -68,7 +74,12 @@ const updateProduct = () => {
         title="ZZZ"
         onPress={updateProduct}
       />
-      
+
+      <Button
+        title="TIPOS DE DOCUMENTOS"
+        onPress={documentTypes}
+      />
+
     </View>
   </View>
 }
@@ -88,7 +99,7 @@ const styles = StyleSheet.create({
     flex: 6,
     alignItems: 'stretch',
     justifyContent: 'space-around',
-    marginHorizontal:10
+    marginHorizontal: 10
 
   }
 });

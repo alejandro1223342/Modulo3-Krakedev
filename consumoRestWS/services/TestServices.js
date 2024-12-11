@@ -5,13 +5,13 @@ export const getAllPostService = () => {
 
 }
 
-export const createPostService = () => {
+export const createPostService = (post, fnExito) => {
     const config = {
         method: 'POST',
         body: JSON.stringify({
-            title: 'Este es mi mensaje',
-            body: 'EL PEPE',
-            userId: 11,
+            title: post.title,
+            body: post.body,
+            userId: 1,
         }),
         headers: {
             'Content-type': 'application/json',
@@ -20,7 +20,7 @@ export const createPostService = () => {
 
     fetch('https://jsonplaceholder.typicode.com/posts', config)
         .then((response) => { return response.json() })
-        .then((json) => { console.log(json) })
+        .then((json) => { console.log(json); fnExito() })
 
 }
 
@@ -97,5 +97,33 @@ export const updateProductsService = () => {
     fetch('https://fakestoreapi.com/products/7', config)
         .then(res => res.json())
         .then(json => console.log(json))
+
+}
+
+//Traer Documetos de Api
+
+export const getDocumentsTypes = () => {
+    fetch('http://192.168.1.45:8080/inventarios/rest/tiposdocumento/recuperar')
+        .then((response) => { return response.json() })
+        .then((json) => (console.log(json)));
+
+}
+
+
+export const postDocumentTypes = (post, fnExito) => {
+    const config = {
+        method: 'POST',
+        body: JSON.stringify({
+            catIdTipoDc: post.title,
+            catNombre: post.body,
+        }),
+        headers: {
+            'Content-type': 'application/json',
+        }
+    };
+
+    fetch('http://192.168.1.45:8080/inventarios/rest/tiposdocumento/crear', config)
+        .then((response) => { return response.json() })
+        .then((json) => { console.log(json); fnExito() })
 
 }
